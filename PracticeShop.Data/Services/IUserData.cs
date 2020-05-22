@@ -9,6 +9,9 @@ namespace PracticeShop.Data.Services
 {
     public interface IUserData
     {
-        User Login(string username, string password);
+        bool Login(string username, string password);
+
+        User GetUserByUserName(string username);
+        IEnumerable<User> GetAll();
     }
 }

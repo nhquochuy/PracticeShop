@@ -1,6 +1,6 @@
 ﻿<!DOCTYPE html>
 <html lang="en">
-
+@ViewBag.Title
 <head>
 
     <meta charset="utf-8">
@@ -17,6 +17,10 @@
 
     <!-- Custom styles for this template-->
     <link href="~/Areas/Admin/Assets/css/sb-admin-2.min.css" rel="stylesheet">
+
+    <!-- Custom styles for this page -->
+    <link href="~/Areas/Admin/Assets/vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
+
 </head>
 
 <body id="page-top">
@@ -28,7 +32,7 @@
         <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
             @RenderPage("_AdminSideBar.cshtml")
             <!-- Sidebar - Brand -->
-            
+
         </ul>
         <!-- End of Sidebar -->
         <!-- Content Wrapper -->
@@ -222,7 +226,6 @@
                 <!-- Begin Page Content -->
                 <div class="container-fluid">
                     @RenderBody()
-
                 </div>
                 <!-- /.container-fluid -->
 
@@ -282,6 +285,13 @@
     <!-- Page level custom scripts -->
     <script src="~/Areas/Admin/Assets/js/demo/chart-area-demo.js"></script>
     <script src="~/Areas/Admin/Assets/js/demo/chart-pie-demo.js"></script>
+
+    <!-- Page level plugins -->
+    <script src="~/Areas/Admin/Assets/vendor/datatables/jquery.dataTables.min.js"></script>
+    <script src="~/Areas/Admin/Assets/vendor/datatables/dataTables.bootstrap4.min.js"></script>
+
+    <!-- Page level custom scripts -->
+    <script src="~/Areas/Admin/Assets/js/demo/datatables-demo.js"></script>
 
 </body>
 

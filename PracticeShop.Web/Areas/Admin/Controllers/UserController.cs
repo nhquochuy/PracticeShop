@@ -1,5 +1,5 @@
-﻿using PracticeShop.Data.Services;
-using PracticeShop.Web.Models;
+﻿using PracticeShop.Data.Models;
+using PracticeShop.Data.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,32 +10,16 @@ namespace PracticeShop.Web.Areas.Admin.Controllers
 {
     public class UserController : Controller
     {
+        IUserData db;
+        public UserController(IUserData db)
+        {
+            this.db = db;
+        }
         // GET: Admin/User
-        public ActionResult Index()
+        public ActionResult Index(User users)
         {
-            return HttpNotFound();
-        }
-
-        [HttpGet]
-        public ActionResult Login(UserModel userModel)
-        {
-            return View();
-        }
-
-        [HttpPost]
-        public ActionResult Login(UserModel userModel, FormCollection form)
-        {
-            IUserData userData = new UserData();
-            if (ModelState.IsValid)
-            {
-                var re = userData.Login(userModel.UserName, userModel.Password);
-                if (re != null)
-                {
-                    return RedirectToAction("Index","Home");
-                }
-                else TempData["wronguser"] = "Login Fail !!!";
-            }
-            return View();
+            var model = db.GetAll();
+            return View(model);
         }
     }
 }
