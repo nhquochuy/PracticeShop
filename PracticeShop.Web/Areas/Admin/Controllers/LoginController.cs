@@ -17,18 +17,19 @@ namespace PracticeShop.Web.Areas.Admin.Controllers
             this.db = db;
         }
         // GET: Admin/Login
+        [HttpGet]
         public ActionResult Index()
         {
-            if (Session[VariableConst._UserSession] == null)
+            if(Session[VariableConst._UserSession] != null)
             {
-                return View();
+                return RedirectToAction("Index", "Home");
             }
-            return RedirectToAction("index","home");
+            return View();
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Login(UserModel user)
+        public ActionResult Index(UserModel user)
         {
             if (ModelState.IsValid)
             {
@@ -39,9 +40,9 @@ namespace PracticeShop.Web.Areas.Admin.Controllers
                     Session.Add(VariableConst._UserSession, userLogin);
                     return RedirectToAction("Index", "Home");
                 }
-                ModelState.AddModelError("loginfail", "Login fail!!!");
+                ModelState.AddModelError(string.Empty, "Login fail!!!");
             }
-            return View("Index");
+            return View();
         }
     }
 }

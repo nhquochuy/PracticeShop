@@ -13,5 +13,8 @@ namespace PracticeShop.Data.Services
 
         User GetUserByUserName(string username);
         IEnumerable<User> GetAll();
+
+        string Add(User user);
+        void Edit(User user);
     }
 }

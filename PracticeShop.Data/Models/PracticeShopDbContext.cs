@@ -31,6 +31,7 @@ namespace PracticeShop.Data.Models
         public virtual DbSet<Slide> Slides { get; set; }
         public virtual DbSet<SystemConfig> SystemConfigs { get; set; }
         public virtual DbSet<Tag> Tags { get; set; }
+        public virtual DbSet<Test> Tests { get; set; }
         public virtual DbSet<User> Users { get; set; }
         public virtual DbSet<UserGroup> UserGroups { get; set; }
 
@@ -186,6 +187,10 @@ namespace PracticeShop.Data.Models
 
             modelBuilder.Entity<Tag>()
                 .Property(e => e.ID)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<Test>()
+                .Property(e => e.UserName)
                 .IsUnicode(false);
 
             modelBuilder.Entity<User>()

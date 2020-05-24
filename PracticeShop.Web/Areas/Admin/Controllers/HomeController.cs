@@ -9,6 +9,7 @@ using System.Web.Routing;
 
 namespace PracticeShop.Web.Areas.Admin.Controllers
 {
+    [SesstionAuthorize]
     public class HomeController : Controller
     {
         // GET: Admin/Home

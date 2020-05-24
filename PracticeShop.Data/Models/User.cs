@@ -2,6 +2,7 @@ namespace PracticeShop.Data.Models
 {
     using System;
     using System.Collections.Generic;
+    using System.ComponentModel;
     using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.Spatial;
@@ -12,6 +13,8 @@ namespace PracticeShop.Data.Models
         public long ID { get; set; }
 
         [StringLength(50)]
+        [Required]
+        [DisplayName("User Name")]
         public string UserName { get; set; }
 
         [StringLength(32)]
@@ -21,6 +24,7 @@ namespace PracticeShop.Data.Models
         public string GroupID { get; set; }
 
         [StringLength(50)]
+        [Required]
         public string Name { get; set; }
 
         [StringLength(50)]

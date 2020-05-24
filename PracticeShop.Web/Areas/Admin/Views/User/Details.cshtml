@@ -1,0 +1,39 @@
+﻿@model PracticeShop.Data.Models.User
+
+@{
+    ViewBag.Mess = "Detail of User " + Model.Name;
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<p>
+    @Html.ActionLink("Edit", "Edit", new { username = Model.UserName}) |
+    @Html.ActionLink("Back to List", "List")
+</p>
+
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.UserName)
+        </dt>
+
+        <dd style="padding-left:20px">
+            @Html.DisplayFor(model => model.UserName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+
+        <dd style="padding-left:20px">
+            @if (!string.IsNullOrEmpty(Model.Name))
+            {
+                @Html.DisplayFor(model => model.Name)
+            }
+            else
+            {
+                <p>No Name</p>
+            }
+        </dd>
+    </dl>
+</div>
