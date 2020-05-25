@@ -26,6 +26,8 @@ namespace PracticeShop.Web.Areas.Admin.Controllers
         #region List
         public ActionResult List(User user)
         {
+            User CurrentUser = (User)Session[VariableConst._UserSession];
+            ViewBag.CurrentUsername = CurrentUser.UserName;
             var model = db.GetAll();
             return View(model);
         }
@@ -65,6 +67,8 @@ namespace PracticeShop.Web.Areas.Admin.Controllers
         }
         #endregion Detail
 
+        #region Edit
+
         [HttpGet]
         public ActionResult Edit(string username)
         {
@@ -84,6 +88,26 @@ namespace PracticeShop.Web.Areas.Admin.Controllers
                 return RedirectToAction("List");
             }
            return View();
+        }
+        #endregion Edit
+
+        [HttpGet]
+        public ActionResult Delete(string username)
+        {
+            var model = db.GetUserByUserName(username);
+            return View(model);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Delete(string username, FormCollection frm)
+        {
+            if(ModelState.IsValid)
+            {
+                db.Delete(username);
+                return RedirectToAction("List");
+            }
+            return View();
         }
     }
 }

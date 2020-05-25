@@ -17,21 +17,24 @@
         </th>
         <th></th>
     </tr>
-
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.UserName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Name)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { username =item.UserName }) |
-            @Html.ActionLink("Details", "Details", new { username = item.UserName }) |
-            @Html.ActionLink("Delete", "Delete", new { username = item.UserName })
-        </td>
-    </tr>
-}
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.UserName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { username = item.UserName }) |
+                @Html.ActionLink("Details", "Details", new { username = item.UserName }) |
+                @if (item.UserName != ViewBag.CurrentUsername)
+                {
+                    @Html.ActionLink("Delete", "Delete", new { username = item.UserName })
+                }
+            </td>
+        </tr>
+    }
 
 </table>

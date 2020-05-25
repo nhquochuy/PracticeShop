@@ -15,10 +15,6 @@ namespace PracticeShop.Web.Areas.Admin.Controllers
         // GET: Admin/Home
         public ActionResult Index()
         {
-            //if((User)Session[VariableConst._UserSession] == null)
-            //{
-            //    return RedirectToAction("Index", "Login");
-            //}
             return View();
         }
     }

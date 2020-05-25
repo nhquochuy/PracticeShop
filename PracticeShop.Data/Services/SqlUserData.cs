@@ -39,6 +39,16 @@ namespace PracticeShop.Data.Services
             return erro_Mess;
         }
 
+        public void Delete(string username)
+        {
+            var User = GetUserByUserName(username);
+            if(User != null)
+            {
+                db.Users.Remove(User);
+                db.SaveChanges();
+            }
+        }
+
         public void Edit(User user)
         {
             if(GetUserByUserName(user.UserName) != null)

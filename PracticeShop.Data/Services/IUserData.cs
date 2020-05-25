@@ -16,5 +16,6 @@ namespace PracticeShop.Data.Services
 
         string Add(User user);
         void Edit(User user);
+        void Delete(string username);
     }
 }
