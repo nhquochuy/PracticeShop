@@ -6,7 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-
+using PagedList;
 namespace PracticeShop.Web.Areas.Admin.Controllers
 {
     [SesstionAuthorize]
@@ -24,12 +24,32 @@ namespace PracticeShop.Web.Areas.Admin.Controllers
         }
 
         #region List
-        public ActionResult List(User user)
+        public ActionResult List(string strSortName = "username", int intSortType = 0, string strSearchText = "", int Page_No = 1)// 0: ASC | 1: desc
         {
             User CurrentUser = (User)Session[VariableConst._UserSession];
             ViewBag.CurrentUsername = CurrentUser.UserName;
             var model = db.GetAll();
-            return View(model);
+            ViewBag.intSortType = intSortType;
+            ViewBag.strSearchText = strSearchText;
+            if (!string.IsNullOrEmpty(strSearchText))
+            {
+                model = model.Where(x => x.UserName.ToUpper().Contains(strSearchText.ToUpper())
+                                    || x.Name.ToUpper().Contains(strSearchText.ToUpper()));
+            }
+            // Sắp xếp
+            switch (strSortName)
+            {
+                case "username":
+                    model = (intSortType == 0) ? model.OrderBy(x => x.UserName) : model.OrderByDescending(x => x.UserName);
+                    break;
+                case "name":
+                    model = (intSortType == 0) ? model.OrderBy(x => x.Name) : model.OrderByDescending(x => x.Name);
+                    break;
+            }
+
+            //int Page_No = 1;
+            int pageSize = 2;
+            return View(model.ToPagedList(Page_No, pageSize));
         }
         #endregion List
 
@@ -91,6 +111,7 @@ namespace PracticeShop.Web.Areas.Admin.Controllers
         }
         #endregion Edit
 
+        #region Delete
         [HttpGet]
         public ActionResult Delete(string username)
         {
@@ -109,5 +130,7 @@ namespace PracticeShop.Web.Areas.Admin.Controllers
             }
             return View();
         }
+
+        #endregion
     }
 }

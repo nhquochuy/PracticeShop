@@ -1,19 +1,29 @@
-﻿@model IEnumerable<PracticeShop.Data.Models.User>
-
+﻿@model  PagedList.IPagedList< PracticeShop.Data.Models.User>
+@using PagedList.Mvc;
 @{
     ViewBag.Mess = "USER LIST";
     Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
-}
+} 
+
+<link href="~/Content/PagedList.css" rel="stylesheet" />
+
 <p>
     @Html.ActionLink("Create New", "Create")
 </p>
+@using (Html.BeginForm("List", "User", FormMethod.Get))
+{
+    <p>
+        Search : @Html.TextBox("strSearchText", (string)ViewBag.strSearchText)
+        <input type="submit" value="Find" />
+    </p>
+}
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.UserName)
+            @Html.ActionLink("User Name", "List", new { strSortName = "username", intSortType = (ViewBag.intSortType == 0) ? 1 : 0, strSearchText = ViewBag.strSearchText })
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Name)
+            @Html.ActionLink("Name", "List", new { strSortName = "name", intSortType = (ViewBag.intSortType == 0) ? 1 : 0, strSearchText = ViewBag.strSearchText })
         </th>
         <th></th>
     </tr>
@@ -38,3 +48,7 @@
     }
 
 </table>
+
+Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+@Html.PagedListPager(Model, Page_No => Url.Action("List",
+    new { Page_No }))
