@@ -1,8 +1,10 @@
-﻿using PracticeShop.Data.Models;
+﻿using PracticeShop.Data.DAO;
+using PracticeShop.Data.Models;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Data.Entity.Validation;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
@@ -64,18 +66,24 @@ namespace PracticeShop.Data.Services
 
         public IEnumerable<User> GetAll()
         {
-            return db.Users.OrderBy(x => x.UserName);
+            return db.Database.SqlQuery<User>("S_GetAllUser");
+            //return db.Users.OrderBy(x => x.UserName);
         }
 
         public User GetUserByUserName(string username)
         {
-            return db.Users.FirstOrDefault(x => x.UserName == username);
+            return db.Database.SqlQuery<User>("S_GetUserByUserName @username", new object[] { new SqlParameter("@username", username) })
+                    .ToList().SingleOrDefault();
+            //return db.Users.FirstOrDefault(x => x.UserName == username);
         }
 
         public bool Login(string username, string password)
         {
             password = Encryptor.MD5Hash(password);
-            return (db.Users.FirstOrDefault(x => x.UserName == username && x.Password == password) != null);
+            object[] vs = new object[] { new SqlParameter("@username", username),
+                                         new SqlParameter("@password", password)};
+            return db.Database.SqlQuery<bool>("S_UserLogin @username,@password", vs).SingleOrDefault();
+            //return (db.Users.FirstOrDefault(x => x.UserName == username && x.Password == password) != null);
         }
 
     }
