@@ -20,7 +20,7 @@ namespace PracticeShop.Web.Areas.Admin.Controllers
         // GET: Admin/User
         public ActionResult Index()
         {
-            return HttpNotFound();
+            return RedirectToAction("List");
         }
 
         #region List

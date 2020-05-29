@@ -16,10 +16,9 @@ namespace PracticeShop.Web
         {
             var builder = new ContainerBuilder();
             builder.RegisterControllers(typeof(MvcApplication).Assembly);
-            builder.RegisterType<SqlUserData>()
-                .As<IUserData>().InstancePerRequest();
-            builder.RegisterType<PracticeShopDbContext>()
-                .InstancePerRequest();
+            builder.RegisterType<SqlUserData>().As<IUserData>().InstancePerRequest();
+            builder.RegisterType<SqlProductData>().As<IProduct>().InstancePerRequest();
+            builder.RegisterType<PracticeShopDbContext>().InstancePerRequest();
 
             var container = builder.Build();
             DependencyResolver.SetResolver(new AutofacDependencyResolver(container));

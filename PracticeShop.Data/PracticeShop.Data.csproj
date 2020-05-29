@@ -80,7 +80,9 @@
     <Compile Include="Models\UserGroup.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\Encryptor.cs" />
+    <Compile Include="Services\IProduct.cs" />
     <Compile Include="Services\IUserData.cs" />
+    <Compile Include="Services\SqlProductData.cs" />
     <Compile Include="Services\SqlUserData.cs" />
   </ItemGroup>
   <ItemGroup>

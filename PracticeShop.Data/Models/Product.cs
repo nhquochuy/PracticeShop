@@ -29,6 +29,7 @@ namespace PracticeShop.Data.Models
         [Column(TypeName = "xml")]
         public string MoreImages { get; set; }
 
+        [DisplayFormat(DataFormatString ="{0:#000}")]
         public decimal? Price { get; set; }
 
         public decimal? PromotionPrice { get; set; }
@@ -44,6 +45,7 @@ namespace PracticeShop.Data.Models
 
         public int? Warranty { get; set; }
 
+        [DisplayFormat(DataFormatString ="{0:MM/dd/yyyy}")]
         public DateTime? CreatedDate { get; set; }
 
         [StringLength(50)]
